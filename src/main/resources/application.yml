@@ -1,0 +1,4 @@
+quarkus:
+  datasource:
+    db-kind: postgresql
+    jdbc: false
