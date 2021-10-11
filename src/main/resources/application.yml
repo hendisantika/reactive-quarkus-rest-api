@@ -1,4 +1,19 @@
 quarkus:
+  log:
+    level: INFO
+  hibernate-orm:
+    database:
+      generation: drop-and-create
+    log:
+      sql: true
+    dialect: org.hibernate.dialect.PostgreSQL10Dialect
+    jdbc:
+      timezone: UTC
   datasource:
     db-kind: postgresql
+    username: hendisantika
+    password: root
     jdbc: false
+    reactive:
+      url: postgresql://localhost:5432/my_db
+      max-size: 20
