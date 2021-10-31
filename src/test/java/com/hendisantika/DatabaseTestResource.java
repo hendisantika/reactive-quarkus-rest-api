@@ -16,7 +16,7 @@ import java.util.Map;
  * Time: 15.50
  */
 public class DatabaseTestResource implements QuarkusTestResourceLifecycleManager {
-    private static final PostgreSQLContainer<?> DATABASE = new PostgreSQLContainer<>("postgres:12");
+    private static final PostgreSQLContainer<?> DATABASE = new PostgreSQLContainer<>("postgres:14");
 
     @Override
     public Map<String, String> start() {

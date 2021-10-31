@@ -1,19 +1,26 @@
 quarkus:
-  log:
-    level: INFO
-  hibernate-orm:
-    database:
-      generation: drop-and-create
-    log:
-      sql: true
-    dialect: org.hibernate.dialect.PostgreSQL10Dialect
-    jdbc:
-      timezone: UTC
   datasource:
-    db-kind: postgresql
-    username: hendisantika
-    password: root
-    jdbc: false
+    username: user
+    password: password
     reactive:
       url: postgresql://localhost:5432/my_db
-      max-size: 20
+      max-size: '20'
+    db-kind: postgresql
+    jdbc:
+      ~: false
+      url: jdbc:postgresql://localhost:5432/my_db
+  hibernate-orm:
+    dialect: org.hibernate.dialect.PostgreSQL10Dialect
+  flyway:
+    migrate: 'true'
+    baseline-on-migrate: 'true'
+    locations: db/migration
+    migrate-at-start: 'true'
+    schemas: account
+    baseline-version: '0'
+  log:
+    level: INFO
+    log:
+      sql: true
+    jdbc:
+      timezone: UTC
