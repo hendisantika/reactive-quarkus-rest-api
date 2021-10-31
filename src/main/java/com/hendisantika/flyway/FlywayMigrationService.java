@@ -1,11 +1,11 @@
 package com.hendisantika.flyway;
 
 import io.quarkus.runtime.StartupEvent;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.flywaydb.core.Flyway;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
-import javax.resource.spi.ConfigProperty;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,6 +18,9 @@ import javax.resource.spi.ConfigProperty;
  */
 @ApplicationScoped
 public class FlywayMigrationService {
+    @ConfigProperty(name = "quarkus.flyway.migrate")
+    boolean runMigration;
+
     @ConfigProperty(name = "quarkus.datasource.reactive.url")
     String datasourceUrl;
 
@@ -28,8 +31,10 @@ public class FlywayMigrationService {
     String datasourcePassword;
 
     public void runFlywayMigration(@Observes StartupEvent event) {
-        Flyway flyway = Flyway.configure().dataSource("jdbc:" + datasourceUrl, datasourceUsername,
-                datasourcePassword).load();
-        flyway.migrate();
+        if (runMigration) {
+            Flyway flyway = Flyway.configure().dataSource("jdbc:" + datasourceUrl, datasourceUsername,
+                    datasourcePassword).load();
+            flyway.migrate();
+        }
     }
 }
