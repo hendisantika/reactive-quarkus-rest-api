@@ -18,13 +18,13 @@ import java.util.stream.Collectors;
 public interface AccountMapper {
     AccountDto toDomain(Account entity);
 
-    Account toEntity(Account domain);
+    Account toEntity(AccountDto domain);
 
     default List<AccountDto> toDomainList(List<Account> list) {
         return list.stream().map(this::toDomain).collect(Collectors.toList());
     }
 
-    default List<Account> toEntityList(List<Account> list) {
+    default List<Account> toEntityList(List<AccountDto> list) {
         return list.stream().map(this::toEntity).collect(Collectors.toList());
     }
 }
